@@ -146,6 +146,12 @@
 }
 
 /* Edit button */
+.acciones-td {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .btn-editar {
   font-family: var(--font-sans);
   font-size: 13px;
@@ -162,4 +168,24 @@
 .btn-editar:hover {
   background-color: var(--color-marigold);
   border-color: var(--color-marigold);
+}
+
+/* Delete button */
+.btn-eliminar {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border: 1.5px solid #ffeae0;
+  border-radius: var(--radius-pill);
+  background-color: #fff5f0;
+  color: var(--color-papaya);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-eliminar:hover {
+  background-color: var(--color-papaya);
+  border-color: var(--color-papaya);
+  color: var(--color-white);
 }

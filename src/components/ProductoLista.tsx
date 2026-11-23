@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { obtenerProductos, type Producto } from "../services/productoService";
+import { eliminarProducto, obtenerProductos, type Producto } from "../services/productoService";
 import "./ProductoLista.css";
 
 interface ProductoListaProps {
@@ -26,6 +26,17 @@ export function ProductoLista({ onSeleccionarProducto, recargarKey }: ProductoLi
 
         cargarProductos();
     }, [recargarKey]);
+
+    const handleEliminar = async (id: string) => {
+        try {
+            await eliminarProducto(id);
+            setProductos((prev) => prev.filter((producto) => producto.id !== id));
+            alert("Producto eliminado correctamente.");
+        } catch (error) {
+            console.error("Error al eliminar producto:", error);
+            alert("Ocurrió un error al eliminar el producto.");
+        }
+    };
 
     if (cargando) {
         return (
@@ -78,12 +89,20 @@ export function ProductoLista({ onSeleccionarProducto, recargarKey }: ProductoLi
                                     </span>
                                 </td>
                                 <td>
-                                    <button
-                                        className="btn-editar"
-                                        onClick={() => onSeleccionarProducto?.(producto)}
-                                    >
-                                        Editar
-                                    </button>
+                                    <div className="acciones-td">
+                                        <button
+                                            className="btn-editar"
+                                            onClick={() => onSeleccionarProducto?.(producto)}
+                                        >
+                                            Editar
+                                        </button>
+                                        <button
+                                            className="btn-eliminar"
+                                            onClick={() => handleEliminar(producto.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
